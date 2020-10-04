@@ -1,0 +1,142 @@
+
+<link rel="stylesheet" type="text/css" href="md.css">
+
+<meta charset="utf-8">
+
+<style>
+
+	body{
+		font-family: roboto;
+		background-color: #272727;
+		background-image: url("bg2.jpg")
+	}
+
+	.input{
+		padding: 10;
+		outline: none;
+		background-color: #efefef;
+		border: none;
+	}
+
+	*{
+		transition: 0.3s;
+	}
+
+	.opcoes span::after{
+		content:attr(t);
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		background-color: rgba(0,0,0,0.1);
+		display: none;
+		padding: 5;
+		border-radius: 5px;
+	}
+
+	.opcoes span{
+		padding: 5;
+		margin: 5;
+		font-size: 17;
+		color: rgba(255,255,255,0.3);
+		border-radius: 5px;
+		color: transparent;
+		position: relative;
+		width: auto;
+		display: none;
+		cursor: pointer;
+	}
+
+
+
+
+	.opcoes{ padding: 10; }
+	.opcoes .ative{ 
+		background-color: rgba(0,0,0,0.1);
+		color: #111;
+	}
+
+
+	.opcoes .ok{ color:#009688}
+	.opcoes .nok{ color:orangered}
+
+	.md-modal-in{
+		background-image: url("bg2.jpg")
+	}
+</style>
+
+
+<button class="md-modal-trigger md-button-text md-rip" for="modal1">Modal 1</button>
+
+<div class="md-modal-out" id="modal1">
+	<div class="md-modal-in">
+		<div class="opcoes" id='opcoes'></div>
+
+		<input type="" name="" class='input' id="onkey">
+
+	</div>
+</div>
+
+
+
+<script>
+
+	// ユわユづトれ
+
+	obj = {
+		"terra":"earth",
+		"ar":"air",
+		"água":"water",
+		"fogo":"fire"
+	}
+
+	function render(obj,div){
+
+		A = Object.keys(obj)
+		B = Object.values(obj)
+
+		for(i=0;i<A.length;i++){
+			s = document.createElement("span")
+			let l = A[i]+"<br><br>"+B[i]
+			s.onclick=()=>{alertar(l)}
+			s.innerHTML = A[i]
+			div.appendChild(s)
+			// div.innerHTML += "<span onclick='alertar('asd')' t='"+B[i]+"'>"+A[i]+"</span>"
+		}
+
+	}
+
+	render(obj,opcoes)
+
+	a = 0
+	opcoes.children[0].classList.add("ative")
+	opcoes.children[0].style.display='inline-block'
+
+
+	onkey.onkeyup=function(e){
+		if(e.key == "Enter"){
+			
+			if(B[a].split(",").includes(this.value))
+				opcoes.children[a].classList.add("ok")
+			else
+				opcoes.children[a].classList.add("nok")
+			
+
+			opcoes.children[a].setAttribute("onclick","alertar('"+A[a]+" <br><br> "+B[a]+" <br><br> "+this.value+"')")
+
+			opcoes.children[a].classList.remove("ative")
+			opcoes.children[a+1].classList.add("ative")
+
+			opcoes.children[a+1].style.display='inline-block'
+
+
+			this.value = ""
+
+			a++
+		}
+	}
+</script>
+
+
+
+<script src='md.js'></script>
